@@ -1,5 +1,5 @@
 class RAGService {
-    constructor(baseUrl = 'http://localhost:8000') {
+    constructor(baseUrl = process.env.BACKEND_URL || 'http://localhost:8000') {
         this.baseUrl = baseUrl;
     }
 

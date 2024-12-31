@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5050:80"
+    depends_on:
+      - backend
+    networks:
+      - cat-pics-network
+    environment:
+      - BACKEND_URL=http://backend:8000
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend/chroma_db:/app/chroma_db
+    networks:
+      - cat-pics-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  cat-pics-network:
+    driver: bridge
