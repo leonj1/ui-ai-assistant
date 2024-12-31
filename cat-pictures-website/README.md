@@ -42,7 +42,7 @@ docker-compose up -d
 
 2. Access the website:
 - Frontend: http://localhost:5050
-- Backend API: http://localhost:8000
+- Backend API: http://localhost:5051
 
 3. Stop the services:
 ```bash
@@ -91,7 +91,7 @@ cat-pictures-website/
 
 1. If the backend fails to start:
    - Check if the OpenAI API key is correctly set in `backend/.env`
-   - Verify the ports 5050 and 8000 are not in use
+   - Verify the ports 5050 and 5051 are not in use
 
 2. If search doesn't work:
    - Check browser console for errors
