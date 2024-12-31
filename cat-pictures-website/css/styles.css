@@ -1,5 +1,7 @@
 /* Custom Properties */
 :root {
+    --color-ai: #4a90e2;
+    --modal-backdrop: rgba(0, 0, 0, 0.5);
     --color-primary: #ff6b6b;
     --color-secondary: #4ecdc4;
     --color-dark: #2d3436;
@@ -426,6 +428,202 @@ a {
 .about__text p {
     margin-bottom: var(--spacing-md);
     color: var(--color-gray);
+}
+
+/* Header Tools */
+.header__tools {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex: 1;
+    max-width: 400px;
+}
+
+/* AI Button */
+.ai-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.ai-button:hover {
+    background-color: rgba(74, 144, 226, 0.1);
+}
+
+.ai-icon {
+    color: var(--color-ai);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--modal-backdrop);
+    z-index: 1000;
+    padding: var(--spacing-md);
+}
+
+.modal.is-active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal__content {
+    background: white;
+    border-radius: var(--border-radius);
+    width: 100%;
+    max-width: 600px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal__header {
+    padding: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal__title {
+    font-size: var(--font-size-h3);
+    color: var(--color-ai);
+}
+
+.modal__close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--color-gray);
+    transition: color 0.3s ease;
+}
+
+.modal__close:hover {
+    color: var(--color-dark);
+}
+
+.modal__body {
+    padding: var(--spacing-sm);
+    overflow-y: auto;
+}
+
+/* Chat */
+.chat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    height: 400px;
+}
+
+.chat__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-sm);
+    background-color: var(--color-light);
+    border-radius: var(--border-radius);
+}
+
+.chat__input {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.chat__textarea {
+    flex: 1;
+    padding: var(--spacing-sm);
+    border: 1px solid var(--color-gray);
+    border-radius: var(--border-radius);
+    resize: none;
+    font-family: inherit;
+}
+
+.chat__submit {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--color-ai);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.chat__submit:hover {
+    background-color: #357abd;
+}
+
+/* Chat Messages */
+.message {
+    margin-bottom: var(--spacing-sm);
+    animation: fadeIn 0.3s ease;
+}
+
+.message__text {
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+    max-width: 80%;
+}
+
+.message--user .message__text {
+    background-color: var(--color-ai);
+    color: white;
+    margin-left: auto;
+}
+
+.message--ai .message__text {
+    background-color: white;
+    border: 1px solid var(--color-light);
+}
+
+/* Response Table */
+.response-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-sm);
+    background-color: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.response-table th,
+.response-table td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--color-light);
+}
+
+.response-table th {
+    background-color: var(--color-ai);
+    color: white;
+    font-weight: 500;
+}
+
+.response-table tr {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.response-table tr:hover {
+    background-color: rgba(74, 144, 226, 0.1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Mobile Navigation */

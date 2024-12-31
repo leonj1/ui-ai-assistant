@@ -11,9 +11,16 @@
     <header class="header">
         <div class="header__container">
             <h1 class="header__logo">PurrPics</h1>
-            <div class="search-box">
-                <input type="text" id="search-input" class="search-box__input" placeholder="Search...">
-                <ul id="search-results" class="search-results"></ul>
+            <div class="header__tools">
+                <div class="search-box">
+                    <input type="text" id="search-input" class="search-box__input" placeholder="Search...">
+                    <ul id="search-results" class="search-results"></ul>
+                </div>
+                <button id="ai-chat-button" class="ai-button" aria-label="Open AI Chat">
+                    <svg class="ai-icon" viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="currentColor"/>
+                    </svg>
+                </button>
             </div>
             <nav class="header__nav">
                 <ul class="nav__list">
@@ -107,6 +114,26 @@
             <p class="footer__copyright">&copy; 2024 PurrPics. All rights reserved.</p>
         </div>
     </footer>
+    <!-- AI Chat Modal -->
+    <div id="ai-chat-modal" class="modal" aria-hidden="true">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title">AI Assistant</h2>
+                <button class="modal__close" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal__body">
+                <div class="chat">
+                    <div id="chat-messages" class="chat__messages"></div>
+                    <div class="chat__input">
+                        <textarea id="chat-input" class="chat__textarea" placeholder="Ask about our pictures..." rows="3"></textarea>
+                        <button id="chat-submit" class="chat__submit">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/rag.js"></script>
+    <script src="js/ai-chat.js"></script>
 </body>
 </html>
