@@ -121,6 +121,26 @@ a {
     color: var(--color-primary);
 }
 
+/* RAG Search Results */
+.search-result__item--rag {
+    padding: var(--spacing-sm);
+    border-top: 1px solid var(--color-light);
+    background-color: rgba(78, 205, 196, 0.1);
+}
+
+.search-result__answer {
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.4;
+    font-size: 0.95rem;
+}
+
+.search-result__sources {
+    color: var(--color-gray);
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
 .header__logo {
     font-size: var(--font-size-h2);
     color: var(--color-primary);
