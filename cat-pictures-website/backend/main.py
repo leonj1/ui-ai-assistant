@@ -4,9 +4,9 @@ from pydantic import BaseModel
 from typing import List, Optional
 import os
 from dotenv import load_dotenv
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import Chroma
-from langchain.chat_models import ChatOpenAI
+from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_community.vectorstores import Chroma
+from langchain_community.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain.docstore.document import Document
@@ -67,12 +67,14 @@ WEBSITE_CONTENT = [
     )
 ]
 
-# Initialize embeddings and vector store
+# Initialize embeddings
 embeddings = OpenAIEmbeddings()
+
+# Initialize vector store
 vector_store = Chroma.from_documents(
     documents=WEBSITE_CONTENT,
     embedding=embeddings,
-    persist_directory="./chroma_db"
+    persist_directory=os.path.expanduser("~/.local/share/cat-pictures-chroma")
 )
 
 # Initialize LLM and QA chain

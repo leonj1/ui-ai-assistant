@@ -40,3 +40,6 @@ logs/
 *.bak
 *.tmp
 *~
+
+__pycache__/
+
