@@ -8,8 +8,8 @@ const chatSubmit = document.getElementById('chat-submit');
 
 // Constants
 const BACKEND_URL = window.location.hostname === 'localhost' 
-    ? 'http://localhost:8001'
-    : 'https://api.purrpics.com'; // Replace with actual production URL when deploying
+    ? 'http://localhost:7501'
+    : 'http://10.1.1.144:7501'; // Replace with actual production URL when deploying
 
 // Modal Functions
 function openModal() {
@@ -47,7 +47,7 @@ function createResponseTable(answer, sources) {
             const sourceRow = document.createElement('tr');
             sourceRow.innerHTML = `
                 <td>
-                    <strong>Related:</strong> ${source}
+                    <strong>Related:</strong> ${source.type}
                 </td>
             `;
             sourceRow.addEventListener('click', () => navigateToSource(source));
@@ -59,22 +59,10 @@ function createResponseTable(answer, sources) {
 }
 
 function navigateToSource(source) {
-    // Map source titles to their respective sections or pages
-    const sourceMap = {
-        'Peaceful Dreams': '#featured',
-        'Joyful Moments': '#featured',
-        'Window Watcher': '#featured',
-        'General Info': '#about',
-        'Single Picture': '#pricing',
-        'Collection Pack': '#pricing'
-    };
-    
-    const target = sourceMap[source] || '#';
-    if (target === '#about' && window.location.pathname !== '/about.html') {
-        window.location.href = 'about.html';
-    } else {
-        closeModal();
-        document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' });
+    // Handle navigation based on document type and link
+    closeModal();
+    if (source.type === 'page' && source.link) {
+        window.location.href = source.link;
     }
 }
 
@@ -86,7 +74,7 @@ async function sendMessage(message) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ question: message })
+            body: JSON.stringify({ query: message })
         });
         
         if (!response.ok) {
@@ -94,7 +82,14 @@ async function sendMessage(message) {
         }
         
         const data = await response.json();
-        return data;
+        // Transform the response to match expected format
+        return {
+            answer: data.results[0]?.document?.description || 'No relevant information found.',
+            sources: data.results.map(result => ({
+                type: result.document.type,
+                link: result.document.link
+            }))
+        };
     } catch (error) {
         console.error('Error:', error);
         return {

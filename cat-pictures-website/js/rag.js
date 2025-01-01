@@ -1,8 +1,6 @@
 class RAGService {
     constructor() {
-        this.baseUrl = window.location.hostname === 'localhost' 
-            ? 'http://localhost:8001'
-            : 'https://api.purrpics.com'; // Replace with actual production URL when deploying
+        this.baseUrl = 'http://10.1.1.144:7501';
     }
 
     async query(question) {
