@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Peaceful Dreams - A serene photograph of a sleeping cat on a windowsill">
+    <title>Peaceful Dreams - PurrPics</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header__container">
+            <h1 class="header__logo">PurrPics</h1>
+            <div class="header__tools">
+                <div class="search-box">
+                    <input type="text" id="search-input" class="search-box__input" placeholder="Search...">
+                    <ul id="search-results" class="search-results"></ul>
+                </div>
+                <button id="ai-chat-button" class="ai-button" aria-label="Open AI Chat">
+                    <svg class="ai-icon" viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="header__nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="../index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="../about.html" class="nav__link">About</a></li>
+                    <li class="nav__item"><a href="../index.html#featured" class="nav__link">Featured</a></li>
+                    <li class="nav__item"><a href="../index.html#pricing" class="nav__link">Pricing</a></li>
+                    <li class="nav__item"><a href="../index.html#contact" class="nav__link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="product">
+            <div class="product__container">
+                <div class="product__gallery">
+                    <img src="../images/sleeping_cat.jpg" alt="Sleeping cat on a windowsill" class="product__image">
+                </div>
+                <div class="product__details">
+                    <h2 class="product__title">Peaceful Dreams</h2>
+                    <p class="product__price">$29.99</p>
+                    <div class="product__description">
+                        <p>A serene capture of a peaceful cat napping on a sunlit windowsill. This photograph perfectly embodies tranquility and calm, making it an ideal piece for any room where you want to create a peaceful atmosphere.</p>
+                    </div>
+                    <div class="product__features">
+                        <h3>Features:</h3>
+                        <ul>
+                            <li>High resolution digital photograph</li>
+                            <li>Available in multiple sizes</li>
+                            <li>Personal use license included</li>
+                            <li>Instant download after purchase</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="product__cta">Purchase Now</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="related">
+            <div class="related__container">
+                <h2 class="related__title">You Might Also Like</h2>
+                <div class="related__grid">
+                    <article class="picture-card">
+                        <div class="picture-card__image">
+                            <img src="../images/playful_cat.jpg" alt="Playful kitten with a toy" loading="lazy">
+                        </div>
+                        <h3 class="picture-card__title">Joyful Moments</h3>
+                        <p class="picture-card__price">$34.99</p>
+                        <a href="joyful-moments.html" class="picture-card__link" aria-label="View Joyful Moments"></a>
+                    </article>
+                    <article class="picture-card">
+                        <div class="picture-card__image">
+                            <img src="../images/curious_cat.jpg" alt="Curious cat looking at camera" loading="lazy">
+                        </div>
+                        <h3 class="picture-card__title">Window Watcher</h3>
+                        <p class="picture-card__price">$24.99</p>
+                        <a href="window-watcher.html" class="picture-card__link" aria-label="View Window Watcher"></a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <p class="footer__copyright">&copy; 2024 PurrPics. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- AI Chat Modal -->
+    <div id="ai-chat-modal" class="modal" aria-hidden="true">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title">AI Assistant</h2>
+                <button class="modal__close" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal__body">
+                <div class="chat">
+                    <div id="chat-messages" class="chat__messages"></div>
+                    <div class="chat__input">
+                        <textarea id="chat-input" class="chat__textarea" placeholder="Ask about our pictures..." rows="3"></textarea>
+                        <button id="chat-submit" class="chat__submit">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/rag.js"></script>
+    <script src="../js/ai-chat.js"></script>
+</body>
+</html>
