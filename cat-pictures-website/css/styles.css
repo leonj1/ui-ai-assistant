@@ -800,3 +800,55 @@ a {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     line-height: 1.5;
 }
+
+/* Chat Product Cards */
+.chat-product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+}
+
+.chat-product-card {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.chat-product-card:hover {
+    transform: translateY(-4px);
+}
+
+.chat-product-card__link {
+    display: block;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+}
+
+.chat-product-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.chat-product-card:hover .chat-product-card__image {
+    transform: scale(1.05);
+}
+
+.chat-product-card__title {
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-h3);
+    color: var(--color-dark);
+    margin: 0;
+}
+
+.chat-product-card__description {
+    padding: 0 var(--spacing-sm) var(--spacing-sm);
+    color: var(--color-gray);
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}

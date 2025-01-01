@@ -30,34 +30,87 @@ function addMessage(text, isUser = false) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-function createResponseTable(answer, sources) {
+function createProductCard(product) {
+    // Log the product data
+    console.log('Creating card for product:', product);
+
+    const card = document.createElement('div');
+    card.className = 'chat-product-card';
+
+    // Extract filename and create normalized versions for HTML and image
+    const apiFilename = product.link.split('/').pop();
+    console.log('Original API filename:', apiFilename);
+    
+    // Map API product names to actual filenames
+    const productMapping = {
+        'curious-cat': {
+            page: 'window-watcher',
+            image: 'curious_cat'
+        },
+        'playful-cat': {
+            page: 'joyful-moments',
+            image: 'playful_cat'
+        }
+    };
+
+    const mapping = productMapping[apiFilename] || {
+        page: apiFilename,
+        image: apiFilename.replace(/-/g, '_')
+    };
+    console.log('Mapped filenames:', mapping);
+
+    const link = document.createElement('a');
+    link.href = `../products/${mapping.page}.html`;
+    link.className = 'chat-product-card__link';
+
+    const image = document.createElement('img');
+    image.src = `../images/${mapping.image}.jpg`;
+    image.alt = product.title;
+    image.className = 'chat-product-card__image';
+    link.appendChild(image);
+
+    const title = document.createElement('h3');
+    title.className = 'chat-product-card__title';
+    title.textContent = product.title;
+
+    const description = document.createElement('p');
+    description.className = 'chat-product-card__description';
+    description.textContent = product.description;
+
+    card.appendChild(link);
+    card.appendChild(title);
+    card.appendChild(description);
+
+    return card;
+}
+
+function createResponseTable(answer, results) {
     const container = document.createElement('div');
     container.className = 'response-container';
     
-    // Add sources as links if available
-    if (sources && sources.length > 0) {
-        sources.forEach(source => {
-            if (source.type === 'page' && source.link) {
-                const linkDiv = document.createElement('div');
-                linkDiv.className = 'response-link';
-                const link = document.createElement('a');
-                link.href = source.link;
-                link.textContent = source.link;
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    navigateToSource(source);
-                });
-                linkDiv.appendChild(link);
-                container.appendChild(linkDiv);
-            }
-        });
-    }
+    // Check if results contain products
+    const products = results.filter(result => result.document.type === 'product');
     
-    // Add answer as a card
-    const card = document.createElement('div');
-    card.className = 'response-card';
-    card.textContent = answer;
-    container.appendChild(card);
+    // Log the products data
+    console.log('Products from API:', products);
+    
+    if (products.length > 0) {
+        // Create product cards grid
+        const grid = document.createElement('div');
+        grid.className = 'chat-product-grid';
+        
+        products.forEach(result => {
+            grid.appendChild(createProductCard(result.document));
+        });
+        
+        container.appendChild(grid);
+    } else {
+        // Add regular response card
+        const card = document.createElement('div');
+        card.className = 'response-card';
+        card.textContent = answer;
+        container.appendChild(card);
+    }
     
     return container;
 }
@@ -86,19 +139,17 @@ async function sendMessage(message) {
         }
         
         const data = await response.json();
-        // Transform the response to match expected format
+        // Log the API response
+        console.log('API Response:', data);
         return {
             answer: data.results[0]?.document?.description || 'No relevant information found.',
-            sources: data.results.map(result => ({
-                type: result.document.type,
-                link: result.document.link
-            }))
+            results: data.results
         };
     } catch (error) {
         console.error('Error:', error);
         return {
             answer: 'Sorry, I encountered an error. Please try again later.',
-            sources: []
+            results: []
         };
     }
 }
@@ -122,7 +173,7 @@ async function handleSubmit() {
     // Create and add response table
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message message--ai';
-    messageDiv.appendChild(createResponseTable(response.answer, response.sources));
+    messageDiv.appendChild(createResponseTable(response.answer, response.results));
     chatMessages.appendChild(messageDiv);
     
     // Reset submit button
