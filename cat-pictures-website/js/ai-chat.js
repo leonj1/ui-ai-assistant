@@ -9,7 +9,7 @@ const chatSubmit = document.getElementById('chat-submit');
 // Constants
 const BACKEND_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:7501'
-    : 'http://10.1.1.144:7501'; // Replace with actual production URL when deploying
+    : 'http://10.1.1.144:7501'; // Replace with actual production URL when deploying to production
 
 // Modal Functions
 function openModal() {
@@ -31,31 +31,35 @@ function addMessage(text, isUser = false) {
 }
 
 function createResponseTable(answer, sources) {
-    const table = document.createElement('table');
-    table.className = 'response-table';
+    const container = document.createElement('div');
+    container.className = 'response-container';
     
-    // Add answer row
-    const answerRow = document.createElement('tr');
-    answerRow.innerHTML = `
-        <td colspan="2">${answer}</td>
-    `;
-    table.appendChild(answerRow);
-    
-    // Add source rows if available
+    // Add sources as links if available
     if (sources && sources.length > 0) {
         sources.forEach(source => {
-            const sourceRow = document.createElement('tr');
-            sourceRow.innerHTML = `
-                <td>
-                    <strong>Related:</strong> ${source.type}
-                </td>
-            `;
-            sourceRow.addEventListener('click', () => navigateToSource(source));
-            table.appendChild(sourceRow);
+            if (source.type === 'page' && source.link) {
+                const linkDiv = document.createElement('div');
+                linkDiv.className = 'response-link';
+                const link = document.createElement('a');
+                link.href = source.link;
+                link.textContent = source.link;
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navigateToSource(source);
+                });
+                linkDiv.appendChild(link);
+                container.appendChild(linkDiv);
+            }
         });
     }
     
-    return table;
+    // Add answer as a card
+    const card = document.createElement('div');
+    card.className = 'response-card';
+    card.textContent = answer;
+    container.appendChild(card);
+    
+    return container;
 }
 
 function navigateToSource(source) {

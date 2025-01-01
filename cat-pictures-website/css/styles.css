@@ -644,3 +644,36 @@ a {
         grid-template-columns: 1fr;
     }
 }
+
+/* AI Chat Response Components */
+.response-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    animation: fadeIn 0.3s ease;
+}
+
+.response-link {
+    margin-bottom: var(--spacing-xs);
+}
+
+.response-link a {
+    color: var(--color-ai);
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.response-link a:hover {
+    color: #357abd;
+}
+
+.response-card {
+    background-color: white;
+    border: 1px solid var(--color-light);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-sm);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    line-height: 1.5;
+}
