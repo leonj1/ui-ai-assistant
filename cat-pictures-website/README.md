@@ -1,4 +1,10 @@
-# PurrPics - Cat Photography Website
+# Mock Website: PurrPics - Cat Photography Website
+
+## Purpose
+
+Tis mock website's purpose is to serve as a proof of concept to test AI chat to help the user navigate the website. Using this AI chat the user does not have to know the website's structure or content. Instead, the AI chat will help the user navigate the website and find the information they need.
+
+![Landing Page](../landing_page.png)
 
 A modern website for selling cat photographs with AI-powered search capabilities.
 
